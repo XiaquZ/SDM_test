@@ -12,14 +12,13 @@ library(rgdal)
 library(corrplot)
 
 # set directory where the downloaded occurrence data will be stored (adapt this)
-setwd("C:/Users/u0142858/OneDrive - KU Leuven/KUL/PhD/My Project/WP2_Map_SB/Rsources/ConservePlants")
-occ_dir <- "./GBIF/"
+occ_dir <- "./ConservePlants/GBIF/"
 
 # set directory where the cleaned occurrence data will be stored (adapt this)
-occ_clean_dir <- "./DataCleaning/"
+occ_clean_dir <- "./ConservePlants/DataCleaning/"
 
 # set directory where environmental data are stored (adapt this)
-env_dir <- "./EnvironmentalData/"
+env_dir <- "./ConservePlants/EnvironmentalData/"
 
 ##########################################################
 ######            Download data from GBIF            #####
@@ -44,7 +43,7 @@ gbif_taxon_keys <-
   filter(kingdom == "Plantae") %>% # remove anything that might have matched to a non-plant
   pull(usagekey) # get the gbif taxonkeys
 # check
-gbif_taxon_keys
+gbif_taxon_keys 
 
 # download occurrence data
 occ_download(
@@ -57,6 +56,7 @@ occ_download(
 
 # download the records from the GBIF website and save them in the 01_GBIF directory
 # under the name 'gbif.csv'
+write.csv(d,"./ConservePlants/GBIF/gbif.csv", row.names = FALSE)
 
 ##########################################################
 ######          Cleaning occurrence records          #####
