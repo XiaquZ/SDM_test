@@ -82,7 +82,7 @@ for (q in 1:length(species_names)) {
   glmFit <- train(presence ~ BIO_02 + BIO_07 + BIO_08 + soc_final,
                   data = species_data,
                   method = "glm", 
-                  family = "binomial",
+                  family = "binomial", #Why it is binominal here?
                   trControl = fitControl,
                   na.action = na.exclude)
   
