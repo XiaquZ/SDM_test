@@ -96,10 +96,21 @@ for (q in 1:length(species_names)) {
   species_of_interest <- 
     subset(gbif_data, species == species_names[q]) %>%
     dplyr::select("species", "decimalLongitude", "decimalLatitude", "coordinateUncertaintyInMeters", "year", "basisOfRecord") %>% # select only relevant columns
+    
+    # I would here have coordinateUncertaintyInMeters so low that it ensures that the coordinate is likely within the raster cell it's supposed to represent
+    # There are likely some good papers that you can use as references for this threshold.
     subset(coordinateUncertaintyInMeters <= 5000 | is.na(coordinateUncertaintyInMeters)) %>% # select only records with precision > 5 km
+    
+    # For plants it's good to use both preserved speciens and human observations. The former is often better than the latter, but to increase the number
+    # of observations, it's smart to have both.
     subset(basisOfRecord == "HUMAN_OBSERVATION") %>% # delete occurrences based on fossil material, germplasm, literature
+    
+    # Do you have any good arguments for deleting occurrences before 1980? This threshold should be argued for
     subset(year >= 1980) %>% # delete occurrences from before 1980
+    
+    
     dplyr::select("species", "decimalLongitude", "decimalLatitude") %>% # select only relevant columns
+    
     CoordinateCleaner::cc_dupl(lon = "decimalLongitude", lat = "decimalLatitude", species = "species", additions = NULL, verbose = TRUE) %>% # remove duplicates
     CoordinateCleaner::cc_equ(lon = "decimalLongitude", lat = "decimalLatitude", test = "identical", verbose = TRUE) %>%
     CoordinateCleaner::cc_cap(lon = "decimalLongitude", lat = "decimalLatitude", verbose = TRUE) %>% # capital centroid detection
