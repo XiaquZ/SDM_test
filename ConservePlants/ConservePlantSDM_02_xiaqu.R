@@ -7,17 +7,18 @@ library(raster)
 library(dplyr)
 library(caret)
 
+setwd("C:/Users/u0142858/OneDrive - KU Leuven/KUL/PhD/My Project/WP2_Map_SB/Rsources/GitHub/SDMs test")
 # set directory where the cleaned occurrence data are stored (adapt this)
-occ_clean_dir <- "C:/Users/tobia/Dropbox/Bioversity/SDM training school/SDM Training School/02_Data_cleaning"
+occ_clean_dir <- "./ConservePlants/DataCleaning"
 
 # set directory where environmental data are stored (adapt this)
-env_dir <- "C:/Users/tobia/Dropbox/Bioversity/SDM training school/SDM Training School/03_Environmental_data"
+env_dir <- "./ConservePlants/EnvironmentalData"
 
 # set directory where to store the models
-SDM_dir <- "C:/Users/tobia/Dropbox/Bioversity/SDM training school/SDM Training School/04_SDM"
+SDM_dir <- "./ConservePlants/SDM"
 
 # set directory where to store the maps
-output_dir <- "C:/Users/tobia/Dropbox/Bioversity/SDM training school/SDM Training School/05_Output"
+output_dir <- "./ConservePlants/Output"
 
 ##########################################################
 ######             Fitting an SDM (GLM)              #####
@@ -46,6 +47,8 @@ covariates_current <- covariates_current[[c("BIO_02",
                                             "soc_final")]]
 
 # model fitting 
+setwd("C:/Users/u0142858/OneDrive - KU Leuven/KUL/PhD/My Project/WP2_Map_SB/Rsources/GitHub/SDMs test")
+
 for (q in 1:length(species_names)) {
   
   print(q)
