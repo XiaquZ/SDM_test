@@ -11,6 +11,7 @@ library(mapr)
 library(rgdal)
 library(corrplot)
 
+setwd("C:/Users/u0142858/OneDrive - KU Leuven/KUL/PhD/My Project/WP2_Map_SB/Rsources/GitHub/SDMs test")
 # set directory where the downloaded occurrence data will be stored (adapt this)
 occ_dir <- "./ConservePlants/GBIF/"
 
@@ -30,7 +31,7 @@ pwd <- "Xiaqugbif123" # your gbif.org password
 email <- "xiaqu.zhou@gmail.com" # your email 
 
 # species for which you want to download
-species_names <- "Campanula latifolia L." # choose your own species here (alphabetical order)
+species_names <- "Campanula latifolia" # choose your own species here (alphabetical order)
 
 # match species names with species names in GBIF database
 gbif_taxon_keys <- 
@@ -72,7 +73,7 @@ plot(BIO1)
 
 # load the occurrence data
 setwd(dir = occ_dir)
-gbif_data <- fread("gbif.csv", header = TRUE, sep = "\t")
+gbif_data <- read.csv("C:/Users/u0142858/OneDrive - KU Leuven/KUL/PhD/My Project/WP2_Map_SB/Rsources/GitHub/SDMs test/ConservePlants/GBIF/gbif.csv", header = TRUE, sep = ",")
 # how many rows?
 nrow(gbif_data)
 
@@ -117,7 +118,6 @@ for (q in 1:length(species_names)) {
     as.data.frame() %>%
     mutate(species = species_names[q]) %>%
     write.csv(paste0(occ_clean_dir,"/", species_names[q], ".csv", sep = ""), row.names = FALSE)
-  
 }
 
 # how many rows left?
