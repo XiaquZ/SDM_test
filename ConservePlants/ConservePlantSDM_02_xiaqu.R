@@ -107,6 +107,6 @@ for (q in 1:length(species_names)) {
   plot(species_prediction)
   
   # save the map
-  writeRaster(species_prediction, paste0(output_dir, "/", species_names[q], ".tif"), overwrite = TRUE)
+  #writeRaster(species_prediction, paste0(output_dir, "/", species_names[q], ".tif"), overwrite = TRUE)
   
 }
